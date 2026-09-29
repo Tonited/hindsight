@@ -5,8 +5,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { resolveConfig } from "./config";
 import { daemonEnv, detectLlm, ensureDaemon, startDaemonDetached } from "./daemon";
 
-// A daemon-mode ensure has to clear `preflightDaemon`, which shells out to `uvx` and probes the
-// PATH for an LLM. Neither is guaranteed on a test runner, so stub the subprocess layer; every
+// A daemon-mode ensure has to clear `preflightDaemon`, which shells out to `uvx` and `cargo`.
+// Neither is guaranteed on a test runner, so stub the subprocess layer; every
 // other use of it in daemon.ts sits behind an explicitly injected spawn.
 vi.mock("node:child_process", async (importOriginal) => {
   const actual = await importOriginal<typeof import("node:child_process")>();
